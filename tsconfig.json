@@ -9,7 +9,13 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["src/*"],
+      "*": ["src/app/*"],
+      "config/*": ["src/config/*"],
+      "mongo/*": ["src/mongo/*"]
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
