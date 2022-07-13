@@ -1,8 +1,8 @@
 {
-  "name": "serve",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "name": "iweather-server",
+  "version": "1.0.0",
+  "description": "小冰天气服务端",
+  "author": "ARCTURUS<1638330246@qq.com>",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -22,8 +22,12 @@
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/mongoose": "^9.2.0",
     "@nestjs/platform-express": "^9.0.0",
+    "joi": "^17.6.0",
+    "mongoose": "^6.4.4",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"
