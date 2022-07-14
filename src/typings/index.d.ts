@@ -1,4 +1,4 @@
-interface ISignin {
+interface IAuth {
   password: string;
   email: string;
   timestamp: number;
