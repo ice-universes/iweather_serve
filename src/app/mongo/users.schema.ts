@@ -3,7 +3,9 @@ import { Document } from 'mongoose';
 
 export type UsersDocument = Users & Document;
 
-@Schema()
+@Schema({
+  timestamps: true,
+})
 export class Users extends Document {
   @Prop({ required: true })
   email: string;
