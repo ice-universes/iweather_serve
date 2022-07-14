@@ -1,12 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { makeSalt, encryptPassword } from 'src/utils/crypto';
 import { UsersDocument } from '@mongo/users.schema';
+import { FavoritesDocument } from '@mongo/favorites.schema';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel('users') private userModel: Model<UsersDocument>) {}
+  constructor(
+    @InjectModel('users') private userModel: Model<UsersDocument>,
+    @InjectModel('favorites') private favModel: Model<FavoritesDocument>
+  ) {}
 
   // 查找邮箱是否已经存在
   async findOne(email: string): Promise<UsersDocument | null> {
@@ -31,8 +35,42 @@ export class UsersService {
     await this.userModel.create({ email, password: hashPwd, salt });
 
     return {
-      status: 200,
+      status: HttpStatus.OK,
       message: '注册成功',
+      timestamp: new Date().getTime(),
+    };
+  }
+
+  // 获取用户收藏
+  async favorite(uid: string): Promise<IFavoritesRes> {
+    const res = await this.favModel.findOne({ _id: uid }).exec();
+
+    return {
+      status: HttpStatus.OK,
+      favorites: res ? res.list : [],
+      timestamp: new Date().getTime(),
+    };
+  }
+
+  // 添加收藏
+  async addFavorite(body: {
+    uid: string;
+    item: IFavorites;
+  }): Promise<IFavoritesRes> {
+    const { uid, item } = body;
+
+    const res = await this.favModel.findByIdAndUpdate(
+      uid,
+      { $addToSet: { list: item } },
+      {
+        new: true, // res 是添加新值后的
+        upsert: true, // id 不存在就加入
+      }
+    );
+
+    return {
+      status: HttpStatus.OK,
+      favorites: res.list,
       timestamp: new Date().getTime(),
     };
   }

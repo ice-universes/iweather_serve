@@ -1,7 +1,12 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from '@app/auth/auth.service';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '@app/auth/jwt.guard';
+import { Request } from 'express';
+
+interface Request_ extends Request {
+  user: IPayLoad;
+}
 
 @Controller()
 export class UsersController {
@@ -10,15 +15,27 @@ export class UsersController {
     private readonly auth: AuthService
   ) {}
 
-  @Post('/signin')
+  @Post('signin')
   async register(@Body() body: IAuth) {
     return await this.user.register(body);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('/calendar')
-  async favorites() {
-    return 0;
+  @Get('favorites')
+  async favorites(@Req() req: Request_) {
+    const {
+      user: { uid },
+    } = req;
+    return await this.user.favorite(uid);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('addFavorites')
+  async addFavorites(@Req() req: Request_, @Body() body: IFavorites) {
+    const {
+      user: { uid },
+    } = req;
+    return await this.user.addFavorite({ uid, item: body });
   }
 
   @Post('login')

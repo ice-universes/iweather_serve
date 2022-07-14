@@ -4,9 +4,17 @@ interface IAuth {
   timestamp: number;
 }
 
-interface ISigninRes {
+interface IRes {
   status: number;
   message: string;
+  timestamp: number;
+}
+
+type ISigninRes = IRes;
+
+interface IFavoritesRes {
+  status: number;
+  favorites: Array<IFavorites>;
   timestamp: number;
 }
 
@@ -23,8 +31,14 @@ interface IAuthConfig {
   expires: string;
 }
 
-interface IValidate {
+interface IPayLoad {
   email: string;
-  iat: number;
-  exp: number;
+  uid: string;
+}
+
+interface IFavorites {
+  latitude: number;
+  logitude: number;
+  city?: string;
+  address?: string;
 }
