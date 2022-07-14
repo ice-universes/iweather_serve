@@ -1,6 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from '@app/auth/auth.service';
 import { UsersService } from './users.service';
+import { JwtAuthGuard } from '@app/auth/jwt.guard';
 
 @Controller()
 export class UsersController {
@@ -12,6 +13,12 @@ export class UsersController {
   @Post('/signin')
   async register(@Body() body: IAuth) {
     return await this.user.register(body);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/calendar')
+  async favorites() {
+    return 0;
   }
 
   @Post('login')

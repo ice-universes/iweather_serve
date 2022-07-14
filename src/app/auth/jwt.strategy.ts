@@ -18,4 +18,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       secretOrKey: authcfg.secret,
     });
   }
+
+  async validate(payload: IValidate) {
+    return { email: payload.email };
+  }
 }
