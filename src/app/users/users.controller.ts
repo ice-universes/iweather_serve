@@ -47,6 +47,15 @@ export class UsersController {
     return await this.user.deleteFavorites({ uid, item: body });
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Post('checkin')
+  async checkin(@Req() req: Request_, @Body() body: ICheckIn) {
+    const {
+      user: { uid },
+    } = req;
+    return await this.user.checkin({ uid, item: body });
+  }
+
   @Post('login')
   async login(@Body() body: IAuth) {
     const { email, password } = body;

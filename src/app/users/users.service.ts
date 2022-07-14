@@ -4,12 +4,14 @@ import { Model } from 'mongoose';
 import { makeSalt, encryptPassword } from 'src/utils/crypto';
 import { UsersDocument } from '@mongo/users.schema';
 import { FavoritesDocument } from '@mongo/favorites.schema';
+import { CalendarDocument } from '@mongo/calendar.schema';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel('users') private userModel: Model<UsersDocument>,
-    @InjectModel('favorites') private favModel: Model<FavoritesDocument>
+    @InjectModel('favorites') private favModel: Model<FavoritesDocument>,
+    @InjectModel('calendar') private cldModel: Model<CalendarDocument>
   ) {}
 
   // 查找邮箱是否已经存在
@@ -93,6 +95,19 @@ export class UsersService {
     return {
       status: HttpStatus.OK,
       favorites: res.list,
+      timestamp: new Date().getTime(),
+    };
+  }
+
+  // 打卡
+  async checkin(body: { uid: string; item: ICheckIn }): Promise<ICheckinRes> {
+    const { uid, item } = body;
+
+    await this.cldModel.create({ uid, ...item });
+
+    return {
+      status: HttpStatus.OK,
+      message: '打卡成功',
       timestamp: new Date().getTime(),
     };
   }
