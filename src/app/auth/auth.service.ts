@@ -49,6 +49,7 @@ export class AuthService {
   certificate(user: UsersDocument) {
     const payload = {
       email: user.email,
+      uid: user._id,
     };
 
     return this.jwtService.sign(payload); // token
