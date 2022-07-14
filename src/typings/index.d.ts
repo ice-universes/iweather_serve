@@ -12,6 +12,8 @@ interface IRes {
 
 type ISigninRes = IRes;
 
+type ICheckinRes = IRes;
+
 interface IFavoritesRes {
   status: number;
   favorites: Array<IFavorites>;
@@ -36,9 +38,30 @@ interface IPayLoad {
   uid: string;
 }
 
-interface IFavorites {
+interface ILocation {
   latitude: number;
   logitude: number;
   city?: string;
   address?: string;
+}
+
+type IFavorites = ILocation;
+
+interface IWeather {
+  temperature: number;
+  feelsLike: number;
+  icon: string;
+  description: string;
+  wind360: number;
+  windSpeed: number;
+  humidity: number;
+  precip: number;
+  pressure: number;
+  visibility: number;
+  clouds: number;
+}
+
+interface ICheckIn {
+  location: ILocation;
+  weather: IWeather;
 }
