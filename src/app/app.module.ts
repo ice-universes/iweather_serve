@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UsersModule } from '@app/users/users.module';
+
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthModule } from '@app/auth/auth.module';
+import { UsersModule } from '@app/users/users.module';
 
 // 配置文件
 import databaseConfig from '@src/config/database.config';
@@ -11,6 +13,7 @@ import authConfig from '@src/config/auth.config';
   imports: [
     ConfigModule.forRoot({
       load: [databaseConfig, authConfig],
+      isGlobal: true,
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
@@ -31,6 +34,7 @@ import authConfig from '@src/config/auth.config';
       inject: [ConfigService],
     }),
     UsersModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
