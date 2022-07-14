@@ -61,10 +61,32 @@ export class UsersService {
 
     const res = await this.favModel.findByIdAndUpdate(
       uid,
-      { $addToSet: { list: item } },
+      { $addToSet: { list: item } }, // 元素不存在时添加
       {
         new: true, // res 是添加新值后的
         upsert: true, // id 不存在就加入
+      }
+    );
+
+    return {
+      status: HttpStatus.OK,
+      favorites: res.list,
+      timestamp: new Date().getTime(),
+    };
+  }
+
+  // 删除收藏
+  async deleteFavorites(body: {
+    uid: string;
+    item: IFavorites;
+  }): Promise<IFavoritesRes> {
+    const { uid, item } = body;
+
+    const res = await this.favModel.findByIdAndUpdate(
+      uid,
+      { $pull: { list: item } },
+      {
+        new: true,
       }
     );
 

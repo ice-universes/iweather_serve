@@ -38,6 +38,15 @@ export class UsersController {
     return await this.user.addFavorite({ uid, item: body });
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Post('deleteFavorites')
+  async deleteFavorites(@Req() req: Request_, @Body() body: IFavorites) {
+    const {
+      user: { uid },
+    } = req;
+    return await this.user.deleteFavorites({ uid, item: body });
+  }
+
   @Post('login')
   async login(@Body() body: IAuth) {
     const { email, password } = body;
