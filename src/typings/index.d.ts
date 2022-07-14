@@ -22,3 +22,9 @@ interface IAuthConfig {
   secret: string;
   expires: string;
 }
+
+interface IValidate {
+  email: string;
+  iat: number;
+  exp: number;
+}
