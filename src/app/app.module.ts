@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import datebaseConfig from 'config/datebase';
+import { MongooseModule } from '@nestjs/mongoose';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true, // 全局使用
-      load: [datebaseConfig], // 自定义配置文件
+    MongooseModule.forRoot('mongodb://127.0.0.1:27017', {
+      dbName: 'user',
     }),
+    UsersModule,
   ],
 })
 export class AppModule {}
