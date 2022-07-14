@@ -25,7 +25,7 @@ DATABASE_PASSWORD=xxx # 数据库密码, 可空
 
 SECRET=ice-weather # jwt 密钥
 
-EXPIRES=365d # token 超时时间
+EXPIRES=365d # token 过期时间
 ```
 
 ```bash
