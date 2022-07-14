@@ -56,6 +56,15 @@ export class UsersController {
     return await this.user.checkin({ uid, item: body });
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Get('calendar')
+  async calendar(@Req() req: Request_) {
+    const {
+      user: { uid },
+    } = req;
+    return await this.user.calendar(uid);
+  }
+
   @Post('login')
   async login(@Body() body: IAuth) {
     const { email, password } = body;

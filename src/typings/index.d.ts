@@ -65,3 +65,16 @@ interface ICheckIn {
   location: ILocation;
   weather: IWeather;
 }
+
+interface ICalendarItem {
+  location: ILocation;
+  weather: IWeather;
+  date: Date;
+  id: string; // 记录的 id, 用于前端对该记录进行修改
+}
+
+interface ICalendar {
+  status: number;
+  timestamp: number;
+  list: ICalendarItem[];
+}

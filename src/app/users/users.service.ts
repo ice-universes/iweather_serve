@@ -111,4 +111,22 @@ export class UsersService {
       timestamp: new Date().getTime(),
     };
   }
+
+  // 获取打卡表
+  async calendar(uid: string): Promise<ICalendar> {
+    const res = await this.cldModel.find({ uid }).exec();
+
+    return {
+      status: HttpStatus.OK,
+      list: res
+        ? res.map((e: any) => ({
+            location: e.location,
+            weather: e.weather,
+            date: e.createdAt,
+            id: e._id,
+          }))
+        : [],
+      timestamp: new Date().getTime(),
+    };
+  }
 }
