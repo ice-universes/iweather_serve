@@ -9,3 +9,16 @@ interface ISigninRes {
   message: string;
   timestamp: number;
 }
+
+interface IDataBaseConfig {
+  host: string;
+  port: number;
+  dbName: string;
+  userName: string;
+  password: string;
+}
+
+interface IAuthConfig {
+  secret: string;
+  expires: string;
+}
