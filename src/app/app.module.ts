@@ -22,7 +22,7 @@ import mailConfig from '@src/config/mail.config';
       useFactory: async (configService: ConfigService) => {
         const db = configService.get<IDataBaseConfig>('database');
 
-        const { host, port, dbName, userName, password } = db;
+        const { host, port, dbName, userName, password, prefix } = db;
 
         let admin = '';
         if (userName && password) {
@@ -30,7 +30,7 @@ import mailConfig from '@src/config/mail.config';
         }
 
         return {
-          uri: `mongodb://${admin}${host}:${port}/${dbName}`,
+          uri: `${prefix}${admin}${host}:${port}/${dbName}`,
         };
       },
       inject: [ConfigService],
