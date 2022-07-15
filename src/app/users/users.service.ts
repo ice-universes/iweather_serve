@@ -159,4 +159,58 @@ export class UsersService {
     if (res.uid === uid) return true;
     else return false;
   }
+
+  // 保存验证码
+  async saveCode(code: string, email: string) {
+    await this.userModel.findOneAndUpdate(
+      { email },
+      { validateCode: code, codeCreateAt: new Date() }
+    );
+  }
+
+  // 验证验证码, 并修改密码
+  async validateAndChangePwd({ code, email, password }: IChangePasswordBody) {
+    if (!password)
+      return {
+        status: 306,
+        timestamp: new Date().getTime(),
+        message: '无效密码',
+      };
+
+    const user = await this.userModel.findOne({ email });
+
+    if (user) {
+      // 该用户存在
+      const { validateCode, codeCreateAt } = user;
+      const now = new Date();
+      if (
+        now.getTime() - codeCreateAt.getTime() > 1800000 ||
+        // 要求数据库中存在 code 并且与请求的相等
+        (code && validateCode !== code)
+      )
+        // 大于 30 分钟无效
+        return {
+          status: 305,
+          timestamp: new Date().getTime(),
+          message: '验证码无效',
+        };
+      else {
+        user.password = encryptPassword(password, user.salt);
+        user.validateCode = ''; // 修改完成后清空验证码
+        await user.save();
+
+        return {
+          status: HttpStatus.OK,
+          timestamp: new Date().getTime(),
+          message: '密码修改成功',
+        };
+      }
+    } else {
+      return {
+        status: 303,
+        timestamp: new Date().getTime(),
+        message: '账号不存在',
+      };
+    }
+  }
 }

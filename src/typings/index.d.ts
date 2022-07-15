@@ -101,3 +101,9 @@ interface IMailBody {
   subject: string; // 邮件标题
   sign?: string; // 邮件签名
 }
+
+interface IChangePasswordBody {
+  email: string;
+  password: string;
+  code: string;
+}

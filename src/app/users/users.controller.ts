@@ -100,4 +100,10 @@ export class UsersController {
         };
     }
   }
+
+  // 修改密码
+  @Post('reset')
+  async changePassword(@Body() body: IChangePasswordBody) {
+    return await this.user.validateAndChangePwd(body);
+  }
 }
