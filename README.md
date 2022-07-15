@@ -26,6 +26,16 @@ DATABASE_PASSWORD=xxx # 数据库密码, 可空
 SECRET=ice-weather # jwt 密钥
 
 EXPIRES=365d # token 过期时间
+
+# 以下用于发送验证码
+
+MAIL_HOST=xxx # 邮箱服务器地址
+
+MAIL_PORT=xxx # 服务器端口
+
+MAIL_ACCOUNT=xxx # 邮箱账号
+
+MAIL_PASSWORD=xxx # 邮箱密码
 ```
 
 ```bash
