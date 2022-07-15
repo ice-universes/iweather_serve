@@ -1,11 +1,11 @@
-import { Module, forwardRef } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
-import { AuthModule } from '@app/auth/auth.module';
 import { UsersSchema } from '@mongo/users.schema';
 import { FavoritesSchema } from '@mongo/favorites.schema';
 import { CalendarSchema } from '@mongo/calendar.schema';
+import { AuthModule } from '@app/auth/auth.module';
 
 // 查询用户信息相关模块
 @Module({
@@ -15,8 +15,6 @@ import { CalendarSchema } from '@mongo/calendar.schema';
       { name: 'favorites', schema: FavoritesSchema },
       { name: 'calendar', schema: CalendarSchema },
     ]),
-    // 模块的循环依赖
-    // docs: https://docs.nestjs.com/fundamentals/circular-dependency
     forwardRef(() => AuthModule),
   ],
   controllers: [UsersController],
