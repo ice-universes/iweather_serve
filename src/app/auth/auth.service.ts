@@ -12,8 +12,8 @@ interface IValidate {
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly user: UsersService,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
+    private readonly user: UsersService
   ) {}
 
   // 验证账号密码
