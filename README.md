@@ -2,6 +2,9 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
+## 接口预览
+![接口预览.png](https://s1.ax1x.com/2022/07/15/jhqZj0.png)
+
 ## 本地开发
 ### 安装依赖
 
