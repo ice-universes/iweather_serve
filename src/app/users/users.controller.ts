@@ -29,6 +29,11 @@ interface Request_ extends Request {
 export class UsersController {
   constructor(private readonly user: UsersService) {}
 
+  @Get()
+  hello() {
+    return 'Hi! there is ice-weather server.';
+  }
+
   @Post('signin')
   @UsePipes(new JoiValidationPipe(authSchema))
   async register(@Body() body: IAuth) {
