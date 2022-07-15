@@ -15,6 +15,12 @@ export class Users extends Document {
 
   @Prop({ required: true })
   salt: string;
+
+  @Prop()
+  validateCode: string; // 验证码
+
+  @Prop()
+  codeCreateAt: Date; // 验证码创建时间
 }
 
 export const UsersSchema = SchemaFactory.createForClass(Users);
