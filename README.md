@@ -41,6 +41,12 @@ MAIL_ACCOUNT=xxx # 邮箱账号
 MAIL_PASSWORD=xxx # 邮箱密码
 ```
 
+关于邮箱, 这里可以采用腾讯企业邮箱(不写 host 的话默认腾讯企业邮箱)
+
+注意不是 qq 邮箱呀 （  ´д｀）ゞ
+
+![jhqxPJ.png](https://s1.ax1x.com/2022/07/15/jhqxPJ.png)
+
 ```bash
 # development
 pnpm run start
