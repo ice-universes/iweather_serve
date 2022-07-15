@@ -5,9 +5,11 @@ import { MailService } from './mail.service';
 import { MailController } from './mail.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as path from 'path';
+import { UsersModule } from '@app/users/users.module';
 
 @Module({
   imports: [
+    UsersModule,
     MailerModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
