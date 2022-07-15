@@ -64,6 +64,9 @@ export class Calendar extends Document {
 
   @Prop({ required: true })
   weather: Weather;
+
+  @Prop()
+  daily: string; // 打卡日记
 }
 
 export const CalendarSchema = SchemaFactory.createForClass(Calendar);
