@@ -88,3 +88,16 @@ interface IDailyBody {
   id: string;
   daily: string;
 }
+
+interface IMailConfig {
+  host: string;
+  port: number;
+  account: string;
+  password: string;
+}
+
+interface IMailBody {
+  email: string;
+  subject: string; // 邮件标题
+  sign?: string; // 邮件签名
+}
