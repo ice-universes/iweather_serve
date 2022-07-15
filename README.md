@@ -22,6 +22,9 @@ DATABASE_PORT=xxx # 不写默认 27017
 
 DATABASE_DB_NAME=xxx # 数据库名
 
+# 默认 mongodb://, mongodb 免费集群是 mongodb+srv://
+DATABASE_PREFIX=xxx # 数据库地址前缀
+
 DATABASE_USERNAME=xxx # 数据库账号, 可空
 
 DATABASE_PASSWORD=xxx # 数据库密码, 可空
