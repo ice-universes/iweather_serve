@@ -22,6 +22,12 @@ import mailConfig from '@src/config/mail.config';
       useFactory: async (configService: ConfigService) => {
         const db = configService.get<IDataBaseConfig>('database');
 
+        const { uri } = db;
+
+        if (uri) {
+          return { uri };
+        }
+
         const { host, port, dbName, userName, password, prefix } = db;
 
         let admin = '';

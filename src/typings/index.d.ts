@@ -6,6 +6,7 @@ interface IDataBaseConfig {
   userName: string;
   password: string;
   prefix: string;
+  uri: string;
 }
 
 // 邮件配置

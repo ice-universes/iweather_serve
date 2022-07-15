@@ -9,5 +9,6 @@ export default registerAs(
     userName: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     prefix: process.env.DATABASE_PREFIX ?? 'mongodb://',
+    uri: process.env.MONGODB_URI,
   })
 );
