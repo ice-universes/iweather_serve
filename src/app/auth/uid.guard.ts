@@ -25,7 +25,7 @@ export class UidGuard implements CanActivate {
       throw new BadReq();
     }
 
-    const eq = await this.user.dailyEqual(uid, id);
+    const eq = await this.user.idIsBelongToUid(uid, id);
 
     if (!eq) {
       throw new UnAuth('权限不足');

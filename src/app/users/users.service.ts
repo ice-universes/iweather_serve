@@ -147,7 +147,7 @@ export class UsersService {
   }
 
   // 判断记录是否属于某用户
-  async dailyEqual(uid: string, id: string): Promise<boolean> {
+  async idIsBelongToUid(uid: string, id: string): Promise<boolean> {
     const res = await this.cldModel.findById(id).exec();
 
     if (!res) throw new NotFound();
