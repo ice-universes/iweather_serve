@@ -12,7 +12,11 @@ interface IRes {
 
 type ISigninRes = IRes;
 
-type ICheckinRes = IRes;
+type IDailyRes = IRes;
+
+interface ICheckinRes extends IRes {
+  id: string;
+}
 
 interface IFavoritesRes {
   status: number;
@@ -64,17 +68,23 @@ interface IWeather {
 interface ICheckIn {
   location: ILocation;
   weather: IWeather;
+  daily?: string;
 }
 
 interface ICalendarItem {
   location: ILocation;
   weather: IWeather;
   date: Date;
-  id: string; // 记录的 id, 用于前端对该记录进行修改
+  id: string; // 记录的 id, 用于前端对记录的修改
 }
 
 interface ICalendar {
   status: number;
   timestamp: number;
   list: ICalendarItem[];
+}
+
+interface IDailyBody {
+  id: string;
+  daily: string;
 }
