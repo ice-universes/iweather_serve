@@ -76,6 +76,15 @@ heroku 官网: [点击进入](https://dashboard.heroku.com/)
 ![j41Oc4.png](https://s1.ax1x.com/2022/07/15/j41Oc4.png)
 
 再次手动部署即可
+
+## 免费的 mongodb 集群
+
+mongodb 官网: [点击进入](https://cloud.mongodb.com/)
+
+注册后按照提示选择一个免费的集群即可
+
+> 不要怪我白嫖怪啊 ˋ( ° ▽、° ) 小项目无人问津, 不打算花钱
+
 ## License
 
 Nest is [MIT licensed](LICENSE).
