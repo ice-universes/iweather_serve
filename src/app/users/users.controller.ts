@@ -3,6 +3,7 @@ import { AuthService } from '@app/auth/auth.service';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '@app/auth/jwt.guard';
 import { Request } from 'express';
+import { UidGuard } from '@app/auth/uid.guard';
 
 interface Request_ extends Request {
   user: IPayLoad;
@@ -63,6 +64,13 @@ export class UsersController {
       user: { uid },
     } = req;
     return await this.user.calendar(uid);
+  }
+
+  @UseGuards(UidGuard) // 这个守卫需要在 jwt 后面, 否则获取不到 user
+  @UseGuards(JwtAuthGuard)
+  @Post('daily')
+  async daily(@Body() body: IDailyBody) {
+    return await this.user.daily(body);
   }
 
   @Post('login')
