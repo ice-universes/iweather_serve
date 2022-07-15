@@ -1,9 +1,3 @@
-interface IAuth {
-  password: string;
-  email: string;
-  timestamp: number;
-}
-
 // 数据库配置
 interface IDataBaseConfig {
   host: string;
@@ -39,6 +33,11 @@ interface ILocation {
   logitude: number;
   city?: string;
   address?: string;
+}
+
+interface IAuth {
+  password: string;
+  email: string;
 }
 
 type IFavorite = ILocation;
@@ -101,7 +100,6 @@ interface IAddFavoritesBody {
 interface ICheckIn {
   location: ILocation;
   weather: IWeather;
-  daily?: string;
 }
 
 interface ICheckInBody {
