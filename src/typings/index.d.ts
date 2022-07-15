@@ -4,26 +4,7 @@ interface IAuth {
   timestamp: number;
 }
 
-interface IRes {
-  status: number;
-  message: string;
-  timestamp: number;
-}
-
-type ISigninRes = IRes;
-
-type IDailyRes = IRes;
-
-interface ICheckinRes extends IRes {
-  id: string;
-}
-
-interface IFavoritesRes {
-  status: number;
-  favorites: Array<IFavorites>;
-  timestamp: number;
-}
-
+// 数据库配置
 interface IDataBaseConfig {
   host: string;
   port: number;
@@ -32,16 +13,27 @@ interface IDataBaseConfig {
   password: string;
 }
 
+// 邮件配置
+interface IMailConfig {
+  host: string;
+  port: number;
+  account: string;
+  password: string;
+}
+
+// jwt 配置
 interface IAuthConfig {
   secret: string;
   expires: string;
 }
 
+// jwt 负载
 interface IPayLoad {
   email: string;
   uid: string;
 }
 
+// 地理坐标
 interface ILocation {
   latitude: number;
   logitude: number;
@@ -49,8 +41,9 @@ interface ILocation {
   address?: string;
 }
 
-type IFavorites = ILocation;
+type IFavorite = ILocation;
 
+// 天气信息
 interface IWeather {
   temperature: number;
   feelsLike: number;
@@ -65,12 +58,7 @@ interface IWeather {
   clouds: number;
 }
 
-interface ICheckIn {
-  location: ILocation;
-  weather: IWeather;
-  daily?: string;
-}
-
+// 打卡记录
 interface ICalendarItem {
   location: ILocation;
   weather: IWeather;
@@ -84,16 +72,10 @@ interface ICalendar {
   list: ICalendarItem[];
 }
 
+// 日记
 interface IDailyBody {
   id: string;
   daily: string;
-}
-
-interface IMailConfig {
-  host: string;
-  port: number;
-  account: string;
-  password: string;
 }
 
 interface IMailBody {
@@ -102,8 +84,27 @@ interface IMailBody {
   sign?: string; // 邮件签名
 }
 
+// 修改密码
 interface IChangePasswordBody {
   email: string;
   password: string;
   code: string;
+}
+
+// 添加地址收藏
+interface IAddFavoritesBody {
+  uid: string;
+  item: IFavorite;
+}
+
+// 每日打卡
+interface ICheckIn {
+  location: ILocation;
+  weather: IWeather;
+  daily?: string;
+}
+
+interface ICheckInBody {
+  uid: string;
+  item: ICheckIn;
 }
