@@ -66,7 +66,16 @@ pnpm run test:cov
 
 heroku 官网: [点击进入](https://dashboard.heroku.com/)
 
+点击 create new app  
+![j417NV.png](https://s1.ax1x.com/2022/07/15/j417NV.png)
 
+按照提示完成部署, 部署结束后进入 settings  
+![j41HhT.png](https://s1.ax1x.com/2022/07/15/j41HhT.png)
+
+下拉后添加环境变量  
+![j41Oc4.png](https://s1.ax1x.com/2022/07/15/j41Oc4.png)
+
+再次手动部署即可
 ## License
 
 Nest is [MIT licensed](LICENSE).
