@@ -19,6 +19,7 @@ import { JwtAuthGuard } from '@app/auth/jwt.guard';
 import { Request } from 'express';
 import { UidGuard } from '@app/auth/uid.guard';
 import { JoiValidationPipe } from '@app/pipe/joi.pipe';
+import { ParseIntPipe } from '@app/pipe/num.pipe';
 
 interface Request_ extends Request {
   user: IPayLoad;
@@ -47,7 +48,8 @@ export class UsersController {
   @Post('addFavorites')
   async addFavorites(
     @Req() req: Request_,
-    @Body(new JoiValidationPipe(favoriteSchema)) body: IFavorite
+    @Body(new JoiValidationPipe(favoriteSchema), new ParseIntPipe())
+    body: IFavorite
   ) {
     const {
       user: { uid },
@@ -59,7 +61,8 @@ export class UsersController {
   @Post('deleteFavorites')
   async deleteFavorites(
     @Req() req: Request_,
-    @Body(new JoiValidationPipe(favoriteSchema)) body: IFavorite
+    @Body(new JoiValidationPipe(favoriteSchema), new ParseIntPipe())
+    body: IFavorite
   ) {
     const {
       user: { uid },
@@ -71,7 +74,8 @@ export class UsersController {
   @Post('checkin')
   async checkin(
     @Req() req: Request_,
-    @Body(new JoiValidationPipe(checkinSchema)) body: ICheckIn
+    @Body(new JoiValidationPipe(checkinSchema), new ParseIntPipe())
+    body: ICheckIn
   ) {
     const {
       user: { uid },
