@@ -16,24 +16,11 @@ pnpm install
 
 根目录下新建 .env, 填写
 ```
-DATABASE_HOST=xxx # 不写默认 127.0.0.1
-
-DATABASE_PORT=xxx # 不写默认 27017
-
-DATABASE_DB_NAME=xxx # 数据库名
-
-MONGODB_URI=xxx # mongodb 地址, 主要适配 vercel
-
-# 默认 mongodb://, mongodb 免费集群是 mongodb+srv://
-DATABASE_PREFIX=xxx # 数据库地址前缀
-
-DATABASE_USERNAME=xxx # 数据库账号, 可空
-
-DATABASE_PASSWORD=xxx # 数据库密码, 可空
+MONGODB_URI=xxx # mongodb 地址
 
 SECRET=ice-weather # jwt 密钥
 
-EXPIRES=365d # token 过期时间
+EXPIRES=365d # token 过期时间, 默认 365d
 
 # 以下用于发送验证码
 

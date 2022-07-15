@@ -1,11 +1,5 @@
 // 数据库配置
 interface IDataBaseConfig {
-  host: string;
-  port: number;
-  dbName: string;
-  userName: string;
-  password: string;
-  prefix: string;
   uri: string;
 }
 

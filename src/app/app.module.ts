@@ -24,20 +24,7 @@ import mailConfig from '@src/config/mail.config';
 
         const { uri } = db;
 
-        if (uri) {
-          return { uri };
-        }
-
-        const { host, port, dbName, userName, password, prefix } = db;
-
-        let admin = '';
-        if (userName && password) {
-          admin = `${userName}:${password}@`;
-        }
-
-        return {
-          uri: `${prefix}${admin}${host}:${port}/${dbName}`,
-        };
+        return { uri };
       },
       inject: [ConfigService],
     }),
