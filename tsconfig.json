@@ -14,7 +14,8 @@
       "@src/*": ["src/*"],
       "@mongo/*": ["src/app/mongo/*"],
       "@config/*": ["src/config/*"],
-      "@app/*": ["src/app/*"]
+      "@app/*": ["src/app/*"],
+      "@utils/*": ["src/utils/*"]
     },
     "incremental": true,
     "skipLibCheck": true,
