@@ -62,6 +62,10 @@ pnpm run test:e2e
 # test coverage
 pnpm run test:cov
 ```
+## heroku 部署
+
+heroku 官网: [点击进入](https://dashboard.heroku.com/)
+
 
 ## License
 
