@@ -1,13 +1,7 @@
-import {
-  Injectable,
-  CanActivate,
-  ExecutionContext,
-  UnauthorizedException,
-  HttpStatus,
-  BadRequestException,
-} from '@nestjs/common';
+import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { UsersService } from '@app/users/users.service';
+import { BadReq, UnAuth } from '@src/utils/http';
 
 // 判断 id 的记录是否属于 uid 用户
 @Injectable()
@@ -28,21 +22,13 @@ export class UidGuard implements CanActivate {
 
   async requestHandle(uid: string, id: string) {
     if (!id || id.length !== 24) {
-      throw new BadRequestException({
-        status: HttpStatus.BAD_REQUEST,
-        message: '参数错误',
-        timestamp: new Date().getTime(),
-      });
+      throw new BadReq();
     }
 
     const eq = await this.user.dailyEqual(uid, id);
 
     if (!eq) {
-      throw new UnauthorizedException({
-        status: HttpStatus.UNAUTHORIZED,
-        message: '权限不足',
-        timestamp: new Date().getTime(),
-      });
+      throw new UnAuth('权限不足');
     }
 
     return true;

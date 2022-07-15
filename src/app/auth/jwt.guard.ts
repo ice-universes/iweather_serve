@@ -1,11 +1,7 @@
-import {
-  ExecutionContext,
-  HttpStatus,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Observable } from 'rxjs';
+import { UnAuth } from '@src/utils/http';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
@@ -17,14 +13,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
   handleRequest(err, user) {
     if (err || !user) {
-      throw (
-        err ??
-        new UnauthorizedException({
-          status: HttpStatus.UNAUTHORIZED,
-          message: '账号未登录',
-          timestamp: new Date().getTime(),
-        })
-      );
+      throw err ?? new UnAuth();
     }
 
     return user;
