@@ -1,4 +1,4 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { makeSalt, encryptPassword } from 'src/utils/crypto';
@@ -103,11 +103,25 @@ export class UsersService {
   async checkin(body: { uid: string; item: ICheckIn }): Promise<ICheckinRes> {
     const { uid, item } = body;
 
-    await this.cldModel.create({ uid, ...item });
+    const ci = await this.cldModel.create({ uid, ...item });
 
     return {
       status: HttpStatus.OK,
       message: '打卡成功',
+      timestamp: new Date().getTime(),
+      id: ci._id, // 便于打卡成功后写点东西
+    };
+  }
+
+  // 每日日记
+  async daily(body: IDailyBody): Promise<IDailyRes> {
+    const { id, daily } = body;
+
+    await this.cldModel.findByIdAndUpdate(id, { daily });
+
+    return {
+      status: HttpStatus.OK,
+      message: '添加日记成功',
       timestamp: new Date().getTime(),
     };
   }
@@ -128,5 +142,21 @@ export class UsersService {
         : [],
       timestamp: new Date().getTime(),
     };
+  }
+
+  // 判断记录是否属于某用户
+  async dailyEqual(uid: string, id: string): Promise<boolean> {
+    const res = await this.cldModel.findById(id).exec();
+
+    if (!res) {
+      throw new NotFoundException({
+        staus: HttpStatus.NOT_FOUND,
+        message: '未找到该条记录',
+        timestamp: new Date().getTime(),
+      });
+    }
+
+    if (res.uid === uid) return true;
+    else return false;
   }
 }
