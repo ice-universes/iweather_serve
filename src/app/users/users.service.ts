@@ -173,12 +173,13 @@ export class UsersService {
     if (user) {
       // 该用户存在
       const { validateCode, codeCreateAt } = user;
+
       const now = new Date();
       if (
         // 存在验证码初始时间
-        (codeCreateAt && now.getTime() - codeCreateAt.getTime() > 1800000) ||
+        !(codeCreateAt && now.getTime() - codeCreateAt.getTime() <= 1800000) ||
         // 要求数据库中存在 code 并且与请求的相等
-        (code && validateCode !== code)
+        (!code && validateCode !== code)
       )
         // 大于 30 分钟无效
         throw new codeError();
