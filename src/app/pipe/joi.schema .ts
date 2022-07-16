@@ -19,7 +19,7 @@ export const resetSchema = joi.object({
 // 经度范围 -180~180, 纬度 -90~90
 export const favoriteSchema = joi.object({
   latitude: joi.number().required().min(-90).max(90),
-  logitude: joi.number().required().min(-180).max(180),
+  longitude: joi.number().required().min(-180).max(180),
   city: joi.string(),
   address: joi.string(),
 });

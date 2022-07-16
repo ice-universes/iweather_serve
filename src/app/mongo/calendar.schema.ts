@@ -46,7 +46,7 @@ export class Location {
   latitude: number;
 
   @Prop({ required: true })
-  logitude: number;
+  longitude: number;
 
   @Prop()
   city?: string;

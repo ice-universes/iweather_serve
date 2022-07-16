@@ -26,7 +26,7 @@ interface IPayLoad {
 // 地理坐标
 interface ILocation {
   latitude: number;
-  logitude: number;
+  longitude: number;
   city?: string;
   address?: string;
 }
