@@ -39,6 +39,7 @@ export const checkinSchema = joi.object({
     pressure: joi.number(),
     visibility: joi.number(),
     clouds: joi.number().min(0).max(100),
+    aqi: joi.number().max(500).min(0),
   }),
 });
 

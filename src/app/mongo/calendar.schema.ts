@@ -36,6 +36,9 @@ class Weather {
 
   @Prop({ required: true })
   clouds: number;
+
+  @Prop({ required: true })
+  aqi: number;
 }
 
 export class Location {

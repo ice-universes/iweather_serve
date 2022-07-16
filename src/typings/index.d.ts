@@ -51,6 +51,7 @@ interface IWeather {
   pressure: number;
   visibility: number;
   clouds: number;
+  aqi: number;
 }
 
 // 打卡记录
