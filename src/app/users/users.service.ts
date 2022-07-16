@@ -139,6 +139,7 @@ export class UsersService {
               location: e.location,
               weather: e.weather,
               date: e.createdAt,
+              daily: e.daily,
               id: e._id,
             })
           )

@@ -57,6 +57,7 @@ interface IWeather {
 interface ICalendarItem {
   location: ILocation;
   weather: IWeather;
+  daily?: string;
   date: Date;
   id: string; // 记录的 id, 用于前端对记录的修改
 }
