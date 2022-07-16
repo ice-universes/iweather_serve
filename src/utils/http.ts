@@ -1,12 +1,4 @@
-import {
-  BadRequestException,
-  ForbiddenException,
-  HttpStatus,
-  HttpException,
-  ServiceUnavailableException,
-  UnauthorizedException,
-  NotFoundException,
-} from '@nestjs/common';
+import { HttpStatus, HttpException } from '@nestjs/common';
 
 // 请求成功, 接收一个字符串或者对象
 export function httpSuccess(msg: string | unknown) {
@@ -26,53 +18,68 @@ export function httpSuccess(msg: string | unknown) {
 }
 
 // 封装自定义异常类
-export class UnAuth extends UnauthorizedException {
+export class UnAuth extends HttpException {
   constructor(msg?: string) {
-    super({
-      status: HttpStatus.UNAUTHORIZED,
-      message: msg ?? '账号未登录',
-      timestamp: new Date().getTime(),
-    });
+    super(
+      {
+        status: HttpStatus.UNAUTHORIZED,
+        message: msg ?? '账号未登录',
+        timestamp: new Date().getTime(),
+      },
+      200
+    );
   }
 }
 
-export class BadReq extends BadRequestException {
+export class BadReq extends HttpException {
   constructor(msg?: string) {
-    super({
-      status: HttpStatus.BAD_REQUEST,
-      message: msg ?? '参数错误',
-      timestamp: new Date().getTime(),
-    });
+    super(
+      {
+        status: HttpStatus.BAD_REQUEST,
+        message: msg ?? '参数错误',
+        timestamp: new Date().getTime(),
+      },
+      200
+    );
   }
 }
 
-export class ServiceUnavailable extends ServiceUnavailableException {
+export class ServiceUnavailable extends HttpException {
   constructor(msg?: string) {
-    super({
-      status: HttpStatus.SERVICE_UNAVAILABLE,
-      message: msg ?? '服务端错误',
-      timestamp: new Date().getTime(),
-    });
+    super(
+      {
+        status: HttpStatus.SERVICE_UNAVAILABLE,
+        message: msg ?? '服务端错误',
+        timestamp: new Date().getTime(),
+      },
+      200
+    );
   }
 }
 
-export class Forbidden extends ForbiddenException {
+export class Forbidden extends HttpException {
   constructor(msg?: string) {
-    super({
-      status: HttpStatus.FORBIDDEN,
-      message: msg ?? '服务端拒绝',
-      timestamp: new Date().getTime(),
-    });
+    super(
+      {
+        status: HttpStatus.FORBIDDEN,
+        message: msg ?? '服务端拒绝',
+        timestamp: new Date().getTime(),
+      },
+      200
+    );
   }
 }
 
-export class NotFound extends NotFoundException {
+export class NotFound extends HttpException {
   constructor(msg?: string) {
-    super({
-      status: HttpStatus.NOT_FOUND,
-      message: msg ?? '未找到该条记录',
-      timestamp: new Date().getTime(),
-    });
+    super(
+      {
+        status: HttpStatus.NOT_FOUND,
+        message: msg ?? '未找到该条记录',
+        timestamp: new Date().getTime(),
+      },
+      200
+    );
   }
 }
 
@@ -84,7 +91,7 @@ export class EmailNotExists extends HttpException {
         message: '账号不存在',
         timestamp: new Date().getTime(),
       },
-      303
+      200
     );
   }
 }
@@ -97,7 +104,7 @@ export class PasswardError extends HttpException {
         message: msg ?? '密码错误',
         timestamp: new Date().getTime(),
       },
-      302
+      200
     );
   }
 }
@@ -110,7 +117,7 @@ export class codeError extends HttpException {
         message: msg ?? '验证码错误',
         timestamp: new Date().getTime(),
       },
-      302
+      200
     );
   }
 }
