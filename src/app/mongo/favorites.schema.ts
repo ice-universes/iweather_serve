@@ -1,15 +1,25 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Schema as MongooseSchema } from 'mongoose';
 import { Document } from 'mongoose';
-import { Location } from './calendar.schema';
 
-class Favorites_ extends Location {}
+class Favorites_ {
+  @Prop({ required: true })
+  latitude: number;
+
+  @Prop({ required: true })
+  longitude: number;
+
+  @Prop()
+  city?: string;
+
+  @Prop()
+  address?: string;
+}
 
 export type FavoritesDocument = Favorites & Document;
 
 @Schema()
 export class Favorites extends Document {
-  @Prop({ type: MongooseSchema.Types.Array, required: true })
+  @Prop({ required: true })
   list: Favorites_[];
 }
 

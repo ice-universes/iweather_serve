@@ -24,6 +24,10 @@ export const favoriteSchema = joi.object({
   address: joi.string(),
 });
 
+export const favoritesSchema = joi.object({
+  list: joi.array().items(favoriteSchema),
+});
+
 // 每日打卡
 export const checkinSchema = joi.object({
   location: favoriteSchema,

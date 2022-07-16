@@ -66,6 +66,8 @@ export class UsersService {
   async favorite(uid: string) {
     const res = await this.favModel.findOne({ _id: uid }).exec();
 
+    console.log(res, uid);
+
     return httpSuccess({
       favorites: res ? res.list : [],
     });
@@ -91,12 +93,12 @@ export class UsersService {
   }
 
   // 删除收藏
-  async deleteFavorites(body: IAddFavoritesBody) {
+  async deleteFavorites(body: IDeleteFavoritesBody) {
     const { uid, item } = body;
 
     const res = await this.favModel.findByIdAndUpdate(
       uid,
-      { $pull: { list: item } },
+      { $pullAll: { list: item } },
       {
         new: true,
       }

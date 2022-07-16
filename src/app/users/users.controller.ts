@@ -13,6 +13,7 @@ import {
   checkinSchema,
   dailySchema,
   resetSchema,
+  favoritesSchema,
 } from '@app/pipe/joi.schema ';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '@app/auth/jwt.guard';
@@ -66,13 +67,13 @@ export class UsersController {
   @Post('deleteFavorites')
   async deleteFavorites(
     @Req() req: Request_,
-    @Body(new JoiValidationPipe(favoriteSchema), new ParseIntPipe())
-    body: IFavorite
+    @Body(new JoiValidationPipe(favoritesSchema), new ParseIntPipe())
+    body: { list: IFavorite[] }
   ) {
     const {
       user: { uid },
     } = req;
-    return await this.user.deleteFavorites({ uid, item: body });
+    return await this.user.deleteFavorites({ uid, item: body.list });
   }
 
   @UseGuards(JwtAuthGuard)

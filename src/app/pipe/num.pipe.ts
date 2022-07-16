@@ -10,7 +10,9 @@ export class ParseIntPipe implements PipeTransform {
 
   // 递归将所以数字字符串转成数字
   t(value: any) {
-    if (value instanceof Object) {
+    if (Array.isArray(value)) {
+      return value.map((e) => this.t(e));
+    } else if (value instanceof Object) {
       const res = {};
       Object.keys(value).forEach((e) => {
         res[e] = this.t(value[e]);

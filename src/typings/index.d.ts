@@ -94,6 +94,11 @@ interface IAddFavoritesBody {
   item: IFavorite;
 }
 
+interface IDeleteFavoritesBody {
+  uid: string;
+  item: IFavorite[];
+}
+
 // 每日打卡
 interface ICheckIn {
   location: ILocation;
