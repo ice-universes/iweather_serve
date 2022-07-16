@@ -66,8 +66,6 @@ export class UsersService {
   async favorite(uid: string) {
     const res = await this.favModel.findOne({ _id: uid }).exec();
 
-    console.log(res, uid);
-
     return httpSuccess({
       favorites: res ? res.list : [],
     });
@@ -113,11 +111,16 @@ export class UsersService {
   async checkin(body: ICheckInBody) {
     const { uid, item } = body;
 
-    const ci = await this.cldModel.create({ uid, ...item });
+    const ci = (await this.cldModel.create({ uid, ...item })) as any;
 
     return httpSuccess({
       message: '打卡成功',
-      id: ci._id, // 便于打卡成功后写点东西
+      item: {
+        id: ci._id, // 便于打卡成功后写点东西
+        location: ci.location,
+        weather: ci.weather,
+        date: ci.createdAt,
+      },
     });
   }
 

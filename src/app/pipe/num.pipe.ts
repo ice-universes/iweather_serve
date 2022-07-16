@@ -15,7 +15,8 @@ export class ParseIntPipe implements PipeTransform {
     } else if (value instanceof Object) {
       const res = {};
       Object.keys(value).forEach((e) => {
-        res[e] = this.t(value[e]);
+        if (e === 'icon') res[e] = value[e];
+        else res[e] = this.t(value[e]);
       });
 
       return res;
