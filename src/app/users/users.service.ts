@@ -14,6 +14,7 @@ import { UsersDocument } from '@mongo/users.schema';
 import { FavoritesDocument } from '@mongo/favorites.schema';
 import { CalendarDocument } from '@mongo/calendar.schema';
 import { AuthService } from '@app/auth/auth.service';
+import { AppInfoDocument } from '@mongo/app.schema';
 
 @Injectable()
 export class UsersService {
@@ -21,12 +22,40 @@ export class UsersService {
     @InjectModel('users') private userModel: Model<UsersDocument>,
     @InjectModel('favorites') private favModel: Model<FavoritesDocument>,
     @InjectModel('calendar') private cldModel: Model<CalendarDocument>,
+    @InjectModel('appInfo') private appModel: Model<AppInfoDocument>,
     @Inject(forwardRef(() => AuthService)) private readonly auth: AuthService
   ) {}
 
   // 查找邮箱是否已经存在
   async findOne(email: string): Promise<UsersDocument | null> {
     return await this.userModel.findOne({ email }).exec();
+  }
+
+  async visit() {
+    const app = await this.appModel.findOne({
+      createAt: {
+        $gte: new Date(new Date().setHours(0, 0, 0, 0)),
+        $lt: new Date(new Date().setHours(23, 59, 59, 1000)),
+      },
+    });
+
+    if (app) {
+      // 如果今天有人访问过
+      app.visitor++;
+      app.save();
+
+      // 返回访问人数
+      return httpSuccess({
+        visitor: app.visitor,
+      });
+    } else {
+      // 没人访问过, 就创造一条记录
+      const app_ = await this.appModel.create({ visitor: 1 });
+
+      return httpSuccess({
+        visitor: app_.visitor,
+      });
+    }
   }
 
   // 注册新用户

@@ -6,6 +6,7 @@ import { UsersSchema } from '@mongo/users.schema';
 import { FavoritesSchema } from '@mongo/favorites.schema';
 import { CalendarSchema } from '@mongo/calendar.schema';
 import { AuthModule } from '@app/auth/auth.module';
+import { AppInfoSchema } from '@mongo/app.schema';
 
 // 查询用户信息相关模块
 @Module({
@@ -14,6 +15,7 @@ import { AuthModule } from '@app/auth/auth.module';
       { name: 'users', schema: UsersSchema },
       { name: 'favorites', schema: FavoritesSchema },
       { name: 'calendar', schema: CalendarSchema },
+      { name: 'appInfo', schema: AppInfoSchema },
     ]),
     forwardRef(() => AuthModule),
   ],

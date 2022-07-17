@@ -35,6 +35,11 @@ export class UsersController {
     return 'Hi! there is ice-weather server.';
   }
 
+  @Get('visit')
+  async visit() {
+    return await this.user.visit();
+  }
+
   @Post('signin')
   @UsePipes(new JoiValidationPipe(authSchema))
   async register(@Body() body: IAuth) {
